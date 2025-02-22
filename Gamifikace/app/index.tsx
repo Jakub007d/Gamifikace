@@ -48,7 +48,7 @@ const login = () => {
 
       if (result) {
         router.push({
-          pathname: "/courses/course_selector/[user_id]",
+          pathname: "/courses/[user_id]",
           params: { user_id: username },
         });
       } else {
@@ -61,43 +61,58 @@ const login = () => {
     }
   }
   return (
-    <Center className="flex-1 bg-white">
-      {" "}
-      {/* Centers content vertically and horizontally */}
-      <VStack className="space-4 w-full items-center">
-        <Input className="variant-outline size-md">
+    <Center className="flex flex-1 bg-white">
+      <VStack className="space-y-4 w-full items-center">
+        {/* Username Input */}
+        <Input className="border border-gray-300 rounded-lg px-3 py-2 w-4/5">
           <InputSlot className="pl-3">
-            <Icon as={MaterialIcons} size="md" className="text-muted-500" />
+            <Icon
+              as={MaterialIcons}
+              name="person"
+              size="md"
+              className="text-gray-500"
+            />
           </InputSlot>
           <InputField
             placeholder="Meno"
             value={username}
             onChangeText={setUsername}
+            className="text-base text-gray-700 flex-1"
           />
         </Input>
+
         {/* Password Input */}
-        <Input className="variant-outline size-md">
+        <Input className="border border-gray-300 rounded-lg px-3 py-2 w-4/5">
           <InputField
             placeholder="Heslo"
             type={show ? "text" : "password"}
             value={password}
             onChangeText={setPassword}
+            className="text-base text-gray-700 flex-1"
           />
           <InputSlot className="pr-3">
             <Pressable onPress={() => setShow(!show)}>
-              <Icon as={MaterialIcons} size="md" className="text-muted-500" />
+              <Icon
+                as={MaterialIcons}
+                name={show ? "visibility" : "visibility-off"}
+                size="md"
+                className="text-gray-500"
+              />
             </Pressable>
           </InputSlot>
         </Input>
+
+        {/* Login Button */}
         {isLoading ? (
-          <Spinner color="blue.500" /> // Adjust the size and color as needed
+          <Spinner className="text-blue-500" />
         ) : (
           <Button
-            onPress={() =>
-              handleLogin({ username: username, password: password })
-            }
+            className="bg-blue-500 rounded-lg w-4/5 h-14"
+            onPress={() => handleLogin({ username, password })}
           >
-            <ButtonText>Prihlásiť sa</ButtonText>
+            <ButtonText className="text-white text-lg font-semibold">
+              Prihlásiť sa
+            </ButtonText>
           </Button>
         )}
       </VStack>
