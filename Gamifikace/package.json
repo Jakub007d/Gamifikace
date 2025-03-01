@@ -21,6 +21,7 @@
     "@gluestack-ui/avatar": "^0.1.18",
     "@gluestack-ui/button": "^1.0.12",
     "@gluestack-ui/checkbox": "^0.1.37",
+    "@gluestack-ui/divider": "^0.1.10",
     "@gluestack-ui/icon": "^0.1.25",
     "@gluestack-ui/input": "^0.1.36",
     "@gluestack-ui/nativewind-utils": "^1.0.26",
