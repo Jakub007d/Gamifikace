@@ -1,10 +1,10 @@
-import CourseItem from "./components/course_item";
+import CourseItem from "../components/course_item";
 import { Link, router, useLocalSearchParams, useNavigation } from "expo-router";
 import { View, Pressable, StyleSheet, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage"; // Import AsyncStorage
 import { useEffect, useLayoutEffect, useState } from "react";
 import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Course } from "../../constants/props";
+import { Course } from "../../../constants/props";
 import { Text } from "@/components/ui/text";
 import { Avatar } from "@/components/ui/avatar";
 import {
@@ -33,6 +33,7 @@ import fetchCourses from "@/api/Downloaders/fetchAllCourses";
 import getInitials from "@/func/getInitials";
 import fetchUserName from "@/api/Downloaders/userNameDownloader";
 import { fetchUserCourseCompletion } from "@/api/Downloaders/lectureCompleationDownloader";
+import { Fab, FabLabel, FabIcon } from "@/components/ui/fab";
 const HomePage = () => {
   const queryClient = useQueryClient();
   const navigation = useNavigation();
@@ -73,6 +74,7 @@ const HomePage = () => {
   useEffect(() => {
     navigation.setOptions({
       title: "Navštevované predmety",
+      headerBackVisible: false,
       headerRight: () => (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           {usernStatus === "success" && (
@@ -91,17 +93,6 @@ const HomePage = () => {
               </Avatar>
             </Pressable>
           )}
-          {/* Tlačidlo + */}
-          <Button
-            className="bg-white"
-            onPress={() => {
-              setOpen(true);
-            }}
-          >
-            <ButtonText size="xl" className="text-black">
-              +
-            </ButtonText>
-          </Button>
         </View>
       ),
     });
@@ -138,13 +129,7 @@ const HomePage = () => {
               {allCourses?.map((item) => (
                 <HStack
                   key={item.id}
-                  px="$4"
-                  py="$2"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  width="100%"
-                  borderBottomWidth={1}
-                  borderColor="$gray300"
+                  className="px-4 py-2 justify-between items-center w-full border-b border-gray-300"
                 >
                   {/* Zarovnanie názvu predmetu doľava */}
                   <Text size="md">{item.name}</Text>
@@ -185,10 +170,18 @@ const HomePage = () => {
               short_descripstion={course.full_name}
               user_name={String(user![0].username)}
               compleated_list={compleated_list}
-            ></CourseItem>
+            />
           ))}
         {/* Display the access token retrieved from AsyncStorage */}
       </ScrollView>
+      <Fab
+        size="lg"
+        className="bg-primary-600 hover:bg-primary-700 active:bg-primary-800"
+        onPress={() => setOpen(!isOpen)}
+      >
+        <FabIcon as={EditIcon} color="white" />
+        <FabLabel>Spravovať kurzy</FabLabel>
+      </Fab>
     </View>
   );
 };
@@ -221,18 +214,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomePage;
-function removeVisitedCourse(
-  arg0: string,
-  item: string,
-  queryClient: QueryClient
-) {
-  throw new Error("Function not implemented.");
-}
-
-function uploadVisitedCourse(
-  arg0: string,
-  item: string,
-  queryClient: QueryClient
-) {
-  throw new Error("Function not implemented.");
-}

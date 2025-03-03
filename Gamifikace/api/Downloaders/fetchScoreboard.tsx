@@ -3,6 +3,7 @@ import { API_URL } from "../constants";
 
 //Funkcia pre získanie skóre.
 async function fetchScore(courseID: string): Promise<Score[]> {
+  console.log(courseID + "this is it ");
   try {
     const response = await fetch(
       API_URL + "/score/?format=json&courseID=" + courseID

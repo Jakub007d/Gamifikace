@@ -48,7 +48,7 @@ const login = () => {
 
       if (result) {
         router.push({
-          pathname: "/courses/[user_id]",
+          pathname: "/courses/courses_list/[user_id]",
           params: { user_id: username },
         });
       } else {

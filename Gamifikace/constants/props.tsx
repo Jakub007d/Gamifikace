@@ -82,6 +82,21 @@ export interface Score {
   /** ID kurzu ktorému pod ktorý patrý bodové ohodnotenie*/
   coursename: string;
 }
+
+export interface Refined_Score {
+  /** ID záznamu o skóre*/
+  id: string;
+  /** Počet bodoc*/
+  points: number;
+  /** ID užívateľa ktorému patrí bodové ohodnotenie*/
+  user: string;
+  /** Meno užívateľa ktorému patrí bodové ohodnotenie*/
+  username: string;
+  /** ID kurzu ktorému pod ktorý patrý bodové ohodnotenie*/
+  coursename: string;
+  /** Pozícia uživateľa v rebríčku*/
+  possition: number;
+}
 /** Rozhranie pre vytvorenie nového bodového stavu*/
 export interface Score_POST {
   /** ID užívateľa*/
